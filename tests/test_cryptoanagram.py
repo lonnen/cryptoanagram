@@ -2,6 +2,7 @@ from .context import cryptoanagram
 
 import unittest
 
+
 class TestSuite(unittest.TestCase):
     """the easiest person to fool is yourself"""
 
@@ -9,5 +10,5 @@ class TestSuite(unittest.TestCase):
         assert cryptoanagram.load_words(cryptoanagram.datadir() + "/ngrams")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

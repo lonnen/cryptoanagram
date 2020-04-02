@@ -9,5 +9,7 @@ __releasedate__ = ""
 __version__ = "0.1.0"
 
 
-QWANTZLE_LETTERS = ("ttttttttttttooooooooooeeeeeeeeaaaaaaallllllnnnnnnuuuuuuiiiiisssssdddddhhhhh"
-    + "yyyyyIIrrrfffbbwwkcmvg:,!!")
+QWANTZLE_LETTERS = (
+    "ttttttttttttooooooooooeeeeeeeeaaaaaaallllllnnnnnnuuuuuuiiiiisssssdddddhhhhh"
+    + "yyyyyIIrrrfffbbwwkcmvg:,!!"
+)
