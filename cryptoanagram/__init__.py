@@ -1,1 +1,4 @@
-QWANTZLE_LETTERS = "12t10o8e7a6l6n6u5i5s5d5h5y3I3r3fbbwwkcmvg"
+from .utils import datadir, load_words
+
+QWANTZLE_LETTERS = ("ttttttttttttooooooooooeeeeeeeeaaaaaaallllllnnnnnnuuuuuuiiiiisssssdddddhhhhh"
+    + "yyyyyIIrrrfffbbwwkcmvg:,!!")
