@@ -1,0 +1,1 @@
+QWANTZLE_LETTERS = "12t10o8e7a6l6n6u5i5s5d5h5y3I3r3fbbwwkcmvg"
