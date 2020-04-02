@@ -1,3 +1,6 @@
+# flake8: noqa
+from .utils import datadir, load_words
+
 __author__ = "Lonnen"
 __email__ = "chris.lonnen@gmail.com"
 
