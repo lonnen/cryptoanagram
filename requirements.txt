@@ -1,0 +1,5 @@
+-e .
+
+pyrsistent==0.16.0
+multiset==2.1.1
+more-itertools==8.2.0
