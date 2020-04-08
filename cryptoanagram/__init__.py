@@ -1,5 +1,5 @@
 # flake8: noqa
-from .utils import datadir, load_words
+from .utils import *
 
 __author__ = "Lonnen"
 __email__ = "chris.lonnen@gmail.com"
