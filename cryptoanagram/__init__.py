@@ -16,3 +16,7 @@ QWANTZLE_LETTERS = (
     "ttttttttttttooooooooooeeeeeeeeaaaaaaallllllnnnnnnuuuuuuiiiiisssssddddd"
     + "hhhhhyyyyyIIrrrfffbbwwkcmvg:,!!"
 )
+
+
+def ngrams(n, corpus="all_trex.txt"):
+    pass
