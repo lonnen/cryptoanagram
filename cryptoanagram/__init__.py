@@ -1,6 +1,8 @@
 # flake8: noqa
 from .utils import *
 
+from more_itertools import windowed
+
 __author__ = "Lonnen"
 __email__ = "chris.lonnen@gmail.com"
 
