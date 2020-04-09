@@ -3,6 +3,8 @@ from .utils import datadir, load_lines
 
 from more_itertools import windowed
 
+from multiset import Multiset
+
 __author__ = "Lonnen"
 __email__ = "chris.lonnen@gmail.com"
 
@@ -27,3 +29,12 @@ def ngrams(n, corpus="all_trex"):
 
 def wordset(corpus="all_trex"):
     return set(ngrams(1, corpus))
+
+
+class Cryptoanagram:
+    def __init__(
+        self, ordered, unordered=QWANTZLE_LETTERS, dictionary=wordset("all_trex")
+    ):
+        self.unordered = unordered
+        self.ordered = ordered
+        self.dictioary = dictionary
