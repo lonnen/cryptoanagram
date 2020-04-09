@@ -23,6 +23,7 @@ setup(
     url='https://github.com/lonnen/cryptoanagram',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
+    install_requires=[], # use pip -r requirements.txt && pip -r requirements-dev.txt
     include_package_data=True,
     package_dir={
         'cryptoanagram': 'cryptoanagram'
