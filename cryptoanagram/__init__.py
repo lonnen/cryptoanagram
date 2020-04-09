@@ -23,3 +23,7 @@ def ngrams(n, corpus="all_trex"):
         words = line.split()
         for w in windowed(words, n):
             yield w
+
+
+def wordset(corpus="all_trex"):
+    return set(ngrams(1, corpus))

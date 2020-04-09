@@ -11,16 +11,37 @@ class TestSuite(unittest.TestCase):
 
     def test_grams(self):
         tgrams = cryptoanagram.ngrams(3, corpus="test_grams")
-        self.assertEqual(next(tgrams), ("I'm", 'at', 'your'))
-        self.assertEqual(next(tgrams), ('at', 'your', 'house'))
-        self.assertEqual(next(tgrams), ('your', 'house', 'like'))
-        self.assertEqual(next(tgrams), ('Why', 'you', 'got'))
-        self.assertEqual(next(tgrams), ('you', 'got', 'your'))
-        self.assertEqual(next(tgrams), ('got', 'your', 'couch'))
-        self.assertEqual(next(tgrams), ('your', 'couch', 'on'))
-        self.assertEqual(next(tgrams), ('couch', 'on', 'my'))
-        self.assertEqual(next(tgrams), ('on', 'my', 'Chucks?'))
-        self.assertEqual(next(tgrams), ('Motherfucker', None, None))
+        self.assertEqual(next(tgrams), ("I'm", "at", "your"))
+        self.assertEqual(next(tgrams), ("at", "your", "house"))
+        self.assertEqual(next(tgrams), ("your", "house", "like"))
+        self.assertEqual(next(tgrams), ("Why", "you", "got"))
+        self.assertEqual(next(tgrams), ("you", "got", "your"))
+        self.assertEqual(next(tgrams), ("got", "your", "couch"))
+        self.assertEqual(next(tgrams), ("your", "couch", "on"))
+        self.assertEqual(next(tgrams), ("couch", "on", "my"))
+        self.assertEqual(next(tgrams), ("on", "my", "Chucks?"))
+        self.assertEqual(next(tgrams), ("Motherfucker", None, None))
+
+    def test_wordset(self):
+        self.assertEqual(
+            sorted(cryptoanagram.wordset(corpus="test_grams")),
+            [
+                ("Chucks?",),
+                ("I'm",),
+                ("Motherfucker",),
+                ("Why",),
+                ("at",),
+                ("couch",),
+                ("got",),
+                ("house",),
+                ("like",),
+                ("my",),
+                ("on",),
+                ("you",),
+                ("your",),
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
