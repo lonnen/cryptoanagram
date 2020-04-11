@@ -18,5 +18,5 @@ QWANTZLE_LETTERS = (
 )
 
 
-def ngrams(n, corpus="all_trex.txt"):
-    pass
+def ngrams(n, corpus="all_trex"):
+    lines = load_lines(datadir() + "/" + corpus + ".txt")

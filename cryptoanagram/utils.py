@@ -8,4 +8,5 @@ def datadir():
 def load_lines(filename):
     """Load a file containing a whitespace delimited list of strings"""
     with open(filename) as f:
-        return [line.strip() for line in f]
+        for line in f:
+            yield line.strip()
