@@ -1,5 +1,5 @@
 # flake8: noqa
-from .utils import *
+from .utils import datadir, load_lines
 
 from more_itertools import windowed
 
@@ -19,4 +19,6 @@ QWANTZLE_LETTERS = (
 
 
 def ngrams(n, corpus="all_trex"):
-    lines = load_lines(datadir() + "/" + corpus + ".txt")
+    for line in load_lines(datadir() + "/" + corpus + ".txt"):
+        for w in windowed(line, n):
+            yield w
