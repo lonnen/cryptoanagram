@@ -20,5 +20,6 @@ QWANTZLE_LETTERS = (
 
 def ngrams(n, corpus="all_trex"):
     for line in load_lines(datadir() + "/" + corpus + ".txt"):
-        for w in windowed(line, n):
+        words = line.split()
+        for w in windowed(words, n):
             yield w
