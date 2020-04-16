@@ -31,6 +31,12 @@ def wordset(corpus="all_trex"):
     return set(ngrams(1, corpus))
 
 
+class Word:
+    def __init__(self, ordered):
+        self.ordered = ordered
+        self.unordered = Multiset(ordered)
+
+
 class Cryptoanagram:
     def __init__(
         self, ordered, unordered=QWANTZLE_LETTERS, dictionary=wordset("all_trex")
