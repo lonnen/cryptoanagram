@@ -42,6 +42,12 @@ class TestSuite(unittest.TestCase):
             ],
         )
 
+    def test_word(self):
+        b = cryptoanagram.Word("bears")
+        s = cryptoanagram.Word("Sabre")
+        self.assertNotEqual(b.ordered, s.ordered)
+        self.assertEqual(b.unordered, s.unordered)
+
 
 if __name__ == "__main__":
     unittest.main()
