@@ -24,7 +24,7 @@ class TestSuite(unittest.TestCase):
 
     def test_wordset(self):
         self.assertEqual(
-            sorted(cryptoanagram.wordset(corpus="test_grams")),
+            sorted([x.ordered for x in cryptoanagram.wordset(corpus="test_grams")]),
             [
                 ("Chucks?",),
                 ("I'm",),
@@ -44,9 +44,9 @@ class TestSuite(unittest.TestCase):
 
     def test_word(self):
         b = cryptoanagram.Word("bears")
-        s = cryptoanagram.Word("Sabre")
+        s = cryptoanagram.Word("sabre")
         self.assertNotEqual(b.ordered, s.ordered)
-        self.assertEqual(b.unordered, s.unordered)
+        self.assertEqual(len(b.unordered.symmetric_difference(s.unordered)), 0)
 
 
 if __name__ == "__main__":

@@ -28,7 +28,7 @@ def ngrams(n, corpus="all_trex"):
 
 
 def wordset(corpus="all_trex"):
-    return set(map(lambda x: Word(x), ngrams(1, corpus)))
+    return map(lambda x: Word(x), set(ngrams(1, corpus)))
 
 
 class Word:
