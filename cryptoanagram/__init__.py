@@ -28,7 +28,7 @@ def ngrams(n, corpus="all_trex"):
 
 
 def wordset(corpus="all_trex"):
-    return set(ngrams(1, corpus))
+    return set(map(lambda x: Word(x), ngrams(1, corpus)))
 
 
 class Word:
@@ -39,8 +39,8 @@ class Word:
 
 class Cryptoanagram:
     def __init__(
-        self, ordered, unordered=QWANTZLE_LETTERS, dictionary=wordset("all_trex")
+        self, ordered=[], unordered=QWANTZLE_LETTERS, dictionary=wordset("all_trex")
     ):
-        self.unordered = unordered
+        self.unordered = Multiset(unordered)
         self.ordered = ordered
-        self.dictioary = dictionary
+        self.dictioary = filter(lambda x: x.unordered.issubset(self.unordered), dictionary)
