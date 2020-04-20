@@ -43,4 +43,6 @@ class Cryptoanagram:
     ):
         self.unordered = Multiset(unordered)
         self.ordered = ordered
-        self.dictioary = filter(lambda x: x.unordered.issubset(self.unordered), dictionary)
+        self.dictioary = filter(
+            lambda x: x.unordered.issubset(self.unordered), dictionary
+        )
