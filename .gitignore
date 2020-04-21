@@ -91,3 +91,5 @@ ENV/
 
 # editor stuff
 .vscode/settings.json
+
+.pytest_*
