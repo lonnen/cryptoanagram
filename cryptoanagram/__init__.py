@@ -46,3 +46,12 @@ class Cryptoanagram:
         self.dictionary = filter(
             lambda x: x.unordered.issubset(self.unordered), dictionary
         )
+
+    def append_string(self, s):
+        """append a string and subtract the letters from the pool"""
+        w = Word(s)
+        if w.issubset(self.unordered):
+            self.ordered.append(w)
+            self.unordered.difference_update(w)
+            return True
+        return False
