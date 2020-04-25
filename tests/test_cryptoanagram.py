@@ -48,6 +48,10 @@ class TestSuite(unittest.TestCase):
         self.assertNotEqual(b.ordered, s.ordered)
         self.assertEqual(len(b.unordered.symmetric_difference(s.unordered)), 0)
 
+    def test_cryptoanagram(self):
+        c = cryptoanagram.Cryptoanagram("frontbottoms")
+        self.assertEqual(len(c.ordered), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

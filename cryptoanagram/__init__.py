@@ -39,7 +39,7 @@ class Word:
 
 class Cryptoanagram:
     def __init__(
-        self, ordered=[], unordered=QWANTZLE_LETTERS, dictionary=wordset("all_trex")
+        self, unordered=QWANTZLE_LETTERS, ordered=[], dictionary=wordset("all_trex")
     ):
         self.unordered = Multiset(unordered)
         self.ordered = ordered
