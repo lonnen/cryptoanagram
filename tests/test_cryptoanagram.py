@@ -5,7 +5,6 @@ from multiset import Multiset
 import unittest
 
 
-
 class TestSuite(unittest.TestCase):
     """the easiest person to fool is yourself"""
 
@@ -54,7 +53,9 @@ class TestSuite(unittest.TestCase):
     def test_cryptoanagram(self):
         c = cryptoanagram.Cryptoanagram("frontbottoms")
         self.assertEqual(len(c.ordered), 0)
-        self.assertEqual(c.unordered.symmetric_difference(Multiset("bottomfronts")), Multiset({}))
+        self.assertEqual(
+            c.unordered.symmetric_difference(Multiset("bottomfronts")), Multiset({})
+        )
 
 
 if __name__ == "__main__":
