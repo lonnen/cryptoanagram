@@ -54,7 +54,14 @@ class TestSuite(unittest.TestCase):
         c = cryptoanagram.Cryptoanagram("frontbottoms")
         self.assertEqual(len(c.ordered), 0)
         self.assertEqual(
-            c.unordered.symmetric_difference(Multiset("bottomfronts")), Multiset({})
+            c.unordered.symmetric_difference(Multiset("bottomfront")), Multiset({"s"})
+        )
+
+    def test_cryptoanagram_append(self):
+        c = cryptoanagram.Cryptoanagram("frontbottoms")
+        d = c.append("front")
+        self.assertEqual(
+            d.unordered.symmetric_difference(Multiset("bottom")), Multiset({"s"})
         )
 
 

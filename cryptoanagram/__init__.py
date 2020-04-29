@@ -50,10 +50,10 @@ class Cryptoanagram:
     def append(self, s):
         """append a string and subtract the letters from the pool"""
         w = Word(s)
-        if w.issubset(self.unordered):
+        if w.unordered.issubset(self.unordered):
             return Cryptoanagram(
-                unordered=self.unordered.difference(w),
-                ordered=(self.ordered + [w]),
+                unordered=self.unordered.difference(w.unordered),
+                ordered=(self.ordered + [w.ordered]),
                 dictionary=self.dictionary,
             )
         raise ValueError("Insufficient unordered letters")
