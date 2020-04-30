@@ -39,21 +39,36 @@ class Word:
 
 class Cryptoanagram:
     def __init__(
-        self, unordered=QWANTZLE_LETTERS, ordered=[], dictionary=wordset("all_trex")
+        self, ordered, unordered=QWANTZLE_LETTERS, dictionary=wordset("all_trex")
     ):
+        if isinstance(ordered, str):
+            ordered = [x.strip() for x in ordered.split()]
         self.unordered = Multiset(unordered)
         self.ordered = ordered
+        # super hacky, but we need the original dict for unordering words
+        self._dictionary = dictionary
         self.dictionary = filter(
-            lambda x: x.unordered.issubset(self.unordered), dictionary
+            lambda x: x.unordered.issubset(self.unordered), self._dictionary
         )
 
-    def append(self, s):
+    def push(self, s):
         """append a string and subtract the letters from the pool"""
         w = Word(s)
         if w.unordered.issubset(self.unordered):
             return Cryptoanagram(
+                self.ordered + [w.ordered],
                 unordered=self.unordered.difference(w.unordered),
-                ordered=(self.ordered + [w.ordered]),
-                dictionary=self.dictionary,
+                dictionary=self._dictionary,
             )
         raise ValueError("Insufficient unordered letters")
+
+    def pop(self):
+        position = -1
+        if len(self.ordered) == 0:
+            raise IndexError("pop from empty list")
+        p = self.ordered[position]
+        return Cryptoanagram(
+            unordered=self.unordered.union(Multiset(p)),
+            ordered=self.ordered[0:position],
+            dictionary=self._dictionary,
+        )
