@@ -50,18 +50,16 @@ class TestSuite(unittest.TestCase):
         self.assertNotEqual(b.ordered, s.ordered)
         self.assertEqual(len(b.unordered.symmetric_difference(s.unordered)), 0)
 
-    def test_cryptoanagram(self):
-        c = cryptoanagram.Cryptoanagram("frontbottoms")
-        self.assertEqual(len(c.ordered), 0)
+    def test_cryptoanagram_push_pop(self):
+        c = cryptoanagram.Cryptoanagram("fundamental")
+        d = c.push("theories")
         self.assertEqual(
-            c.unordered.symmetric_difference(Multiset("bottomfront")), Multiset({"s"})
+            ' '.join(d.ordered),
+            "fundamental theories"
         )
-
-    def test_cryptoanagram_append(self):
-        c = cryptoanagram.Cryptoanagram("frontbottoms")
-        d = c.append("front")
         self.assertEqual(
-            d.unordered.symmetric_difference(Multiset("bottom")), Multiset({"s"})
+            d.unordered.symmetric_difference(c.unordered),
+            Multiset("theories"),
         )
 
 
