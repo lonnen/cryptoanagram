@@ -52,27 +52,20 @@ class TestSuite(unittest.TestCase):
 
     def test_cryptoanagram_init(self):
         c = cryptoanagram.Cryptoanagram("front bottoms")
+        self.assertEqual(" ".join(c.ordered), "front bottoms")
         self.assertEqual(
-            ' '.join(c.ordered),
-            "front bottoms"
+            c.unordered.symmetric_difference(
+                cryptoanagram.Cryptoanagram("bottomfronts").unordered
+            ),
+            Multiset({}),
         )
-        self.assertEqual(
-            c.unordered.symmetric_difference(cryptoanagram.Cryptoanagram("bottomfronts").unordered),
-            Multiset({})
-        )
-
-
 
     def test_cryptoanagram_push_pop(self):
         c = cryptoanagram.Cryptoanagram("fundamental")
         d = c.push("theories")
+        self.assertEqual(" ".join(d.ordered), "fundamental theories")
         self.assertEqual(
-            ' '.join(d.ordered),
-            "fundamental theories"
-        )
-        self.assertEqual(
-            d.unordered.symmetric_difference(c.unordered),
-            Multiset("theories"),
+            d.unordered.symmetric_difference(c.unordered), Multiset("theories"),
         )
 
 
