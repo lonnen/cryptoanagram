@@ -72,3 +72,6 @@ class Cryptoanagram:
             ordered=self.ordered[0:position],
             dictionary=self._dictionary,
         )
+
+    def _filter(self):
+        pass
