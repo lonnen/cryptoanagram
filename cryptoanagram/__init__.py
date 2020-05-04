@@ -47,9 +47,7 @@ class Cryptoanagram:
         self.ordered = ordered
         # super hacky, but we need the original dict for unordering words
         self._dictionary = dictionary
-        self.dictionary = filter(
-            lambda x: x.unordered.issubset(self.unordered), self._dictionary
-        )
+        self.dictionary = list(filter(self._filter, dictionary))
 
     def push(self, s):
         """append a string and subtract the letters from the pool"""
@@ -73,5 +71,5 @@ class Cryptoanagram:
             dictionary=self._dictionary,
         )
 
-    def _filter(self):
-        pass
+    def _filter(self, word):
+        return word.unordered.issubset(self.unordered)

@@ -68,6 +68,15 @@ class TestSuite(unittest.TestCase):
             d.unordered.symmetric_difference(c.unordered), Multiset("theories"),
         )
 
+    def test_cryptoanagram_filter(self):
+        c = cryptoanagram.Cryptoanagram("crypto")
+        d = c.push("anagram")
+        e = cryptoanagram.Cryptoanagram("ana crypto gram")
+        self.assertEqual(
+            sorted(d.dictionary, key=lambda x: x.ordered),
+            sorted(e.dictionary, key=lambda x: x.ordered)
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
