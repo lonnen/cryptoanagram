@@ -74,7 +74,7 @@ class TestSuite(unittest.TestCase):
         e = cryptoanagram.Cryptoanagram("ana crypto gram")
         self.assertEqual(
             sorted(d.dictionary, key=lambda x: x.ordered),
-            sorted(e.dictionary, key=lambda x: x.ordered)
+            sorted(e.dictionary, key=lambda x: x.ordered),
         )
 
 
