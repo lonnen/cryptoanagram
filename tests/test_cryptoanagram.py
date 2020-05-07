@@ -77,6 +77,31 @@ class TestSuite(unittest.TestCase):
             sorted(e.dictionary, key=lambda x: x.ordered),
         )
 
+    def test_filter_words_we_dont_have_letters_to_spell(self):
+        c = cryptoanagram.Cryptoanagram(
+            "I",
+            unordered="thisisnotenoughletters",
+            dictionary={cryptoanagram.Word("thishouldbefiltered")},
+        )
+        self.assertEqual(len(c.dictionary), 0)
+        self.assertEqual(len(c._dictionary), 1)
+
+    def test_filter_words_only_words_we_dont_have_letters_to_spell(self):
+        c = cryptoanagram.Cryptoanagram(
+            "I",
+            unordered="thisisenoughlettersforone",
+            dictionary={
+                cryptoanagram.Word("thisfits"),
+                cryptoanagram.Word("thishouldbefiltered"),
+            },
+        )
+        print([x.ordered for x in c.dictionary])
+        print([x.ordered for x in c._dictionary])
+        print(c.ordered)
+        print(c.unordered.items())
+        self.assertEqual(len(c.dictionary), 1)
+        self.assertEqual(len(c._dictionary), 2)
+
 
 if __name__ == "__main__":
     unittest.main()
