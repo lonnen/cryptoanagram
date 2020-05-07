@@ -1,6 +1,10 @@
 # flake8: noqa
 from .utils import datadir, load_lines
 
+import operator
+
+from functools import reduce
+
 from more_itertools import windowed
 
 from multiset import Multiset
@@ -71,5 +75,10 @@ class Cryptoanagram:
             dictionary=self._dictionary,
         )
 
-    def _filter(self, word):
-        return word.unordered.issubset(self.unordered)
+    def _filter(self, word, threshold=0.5):
+
+        probabilities = []
+
+        probabilities.append(1.0 if word.unordered.issubset(self.unordered) else 0.0)
+
+        return reduce(operator.mul, probabilities, 1.0) > 0.5
