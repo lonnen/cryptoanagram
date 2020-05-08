@@ -4,6 +4,9 @@ from multiset import Multiset
 
 import unittest
 
+Cryptoanagram = cryptoanagram.Cryptoanagram
+Word = cryptoanagram.Word
+
 
 class TestSuite(unittest.TestCase):
     """the easiest person to fool is yourself"""
@@ -45,23 +48,21 @@ class TestSuite(unittest.TestCase):
         )
 
     def test_word(self):
-        b = cryptoanagram.Word("bears")
-        s = cryptoanagram.Word("sabre")
+        b = Word("bears")
+        s = Word("sabre")
         self.assertNotEqual(b.ordered, s.ordered)
         self.assertEqual(len(b.unordered.symmetric_difference(s.unordered)), 0)
 
     def test_cryptoanagram_init(self):
-        c = cryptoanagram.Cryptoanagram("front bottoms")
+        c = Cryptoanagram("front bottoms")
         self.assertEqual(" ".join(c.ordered), "front bottoms")
         self.assertEqual(
-            c.unordered.symmetric_difference(
-                cryptoanagram.Cryptoanagram("bottomfronts").unordered
-            ),
+            c.unordered.symmetric_difference(Cryptoanagram("bottomfronts").unordered),
             Multiset({}),
         )
 
     def test_cryptoanagram_push_pop(self):
-        c = cryptoanagram.Cryptoanagram("fundamental")
+        c = Cryptoanagram("fundamental")
         d = c.push("theories")
         self.assertEqual(" ".join(d.ordered), "fundamental theories")
         self.assertEqual(
@@ -69,31 +70,28 @@ class TestSuite(unittest.TestCase):
         )
 
     def test_cryptoanagram_filter(self):
-        c = cryptoanagram.Cryptoanagram("crypto")
+        c = Cryptoanagram("crypto")
         d = c.push("anagram")
-        e = cryptoanagram.Cryptoanagram("ana crypto gram")
+        e = Cryptoanagram("ana crypto gram")
         self.assertEqual(
             sorted(d.dictionary, key=lambda x: x.ordered),
             sorted(e.dictionary, key=lambda x: x.ordered),
         )
 
     def test_filter_words_we_dont_have_letters_to_spell(self):
-        c = cryptoanagram.Cryptoanagram(
+        c = Cryptoanagram(
             "I",
             unordered="thisisnotenoughletters",
-            dictionary={cryptoanagram.Word("thishouldbefiltered")},
+            dictionary={Word("thishouldbefiltered")},
         )
         self.assertEqual(len(c.dictionary), 0)
         self.assertEqual(len(c._dictionary), 1)
 
     def test_filter_words_only_words_we_dont_have_letters_to_spell(self):
-        c = cryptoanagram.Cryptoanagram(
+        c = Cryptoanagram(
             "I",
             unordered="thisisenoughlettersforone",
-            dictionary={
-                cryptoanagram.Word("thisfits"),
-                cryptoanagram.Word("thishouldbefiltered"),
-            },
+            dictionary={Word("thisfits"), Word("thishouldbefiltered"),},
         )
         print([x.ordered for x in c.dictionary])
         print([x.ordered for x in c._dictionary])
