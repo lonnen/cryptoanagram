@@ -21,6 +21,6 @@ Ryan North followed up with additional clues accompanying `Comic 1666 <http://qw
 
 - Paul Stansifer has released `Qwantzle Data <http://github.com/paulstansifer/qwantzle_data>`_, which scraped `the OhNoRobot search engine <http://www.ohnorobot.com/index.pl?comic=23>`_ to gather Dinosaur Comics text
 - Ryan `released the Dinosaur Comics text as XML <http://www.qwantz.com/everywordindinosaurcomicsOHGOD.xml>`_ which is redundant with Paul's work (above)
-- The longest word is 11 characters long, the secon longest is 8 characters long, and they're side-by-side in the solution
+- The longest word is 11 characters long, the second longest is 8 characters long, and they're side-by-side in the solution
 
 Additionally at TCAF in 2011 Ryan said to me personally that the solution would make a good epitaph.
