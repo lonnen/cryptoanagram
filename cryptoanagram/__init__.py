@@ -80,5 +80,6 @@ class Cryptoanagram:
         probabilities = []
 
         probabilities.append(1.0 if word.unordered.issubset(self.unordered) else 0.0)
+        probabilities.append(1.0 if len(word.ordered) < 11 else 0.0)
 
         return reduce(operator.mul, probabilities, 1.0) > 0.5
