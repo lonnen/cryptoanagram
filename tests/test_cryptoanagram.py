@@ -101,7 +101,14 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(len(c._dictionary), 2)
 
     def test_filter_longword(self):
-        c = cryptoanagram.Cryptoanagram("I", unordered="lessthanmorethaneleven", dictionary={cryptoanagram.Word("lessthan"), cryptoanagram.Word("morethaneleven")})
+        c = cryptoanagram.Cryptoanagram(
+            "I",
+            unordered="lessthanmorethaneleven",
+            dictionary={
+                cryptoanagram.Word("lessthan"),
+                cryptoanagram.Word("morethaneleven"),
+            },
+        )
         self.assertEqual(len(c.dictionary), 1)
         self.assertEqual(len(c._dictionary), 2)
         self.assertEqual(c.dictionary[0].ordered, "lessthan")
