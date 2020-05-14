@@ -91,7 +91,7 @@ class TestSuite(unittest.TestCase):
         c = Cryptoanagram(
             "I",
             unordered="thisisenoughlettersforone",
-            dictionary={Word("thisfits"), Word("thishouldbefiltered"),},
+            dictionary={Word("thisfits"), Word("thishouldbefiltered")},
         )
         print([x.ordered for x in c.dictionary])
         print([x.ordered for x in c._dictionary])
