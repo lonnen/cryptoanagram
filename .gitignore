@@ -93,3 +93,5 @@ ENV/
 .vscode/settings.json
 
 .pytest_*
+
+.pyc
