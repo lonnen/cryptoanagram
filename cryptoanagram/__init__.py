@@ -80,6 +80,12 @@ class Cryptoanagram:
         probabilities = []
 
         probabilities.append(1.0 if word.unordered.issubset(self.unordered) else 0.0)
-        probabilities.append(1.0 if len(word.ordered) < 11 else 0.0)
+
+        # longest word is 11 letters
+        probabilities.append(1.0 if len(word.ordered) < 12 else 0.0)
+
+        # second longest word is 8 letters and is adjacent to 11
+        if len(self.ordered) > 1 and len(self.ordered[-1]) == 11:
+            probabilities.append(1.0 if len(word.ordered) == 8 else 0.0)
 
         return reduce(operator.mul, probabilities, 1.0) > 0.5

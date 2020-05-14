@@ -113,6 +113,20 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(len(c._dictionary), 2)
         self.assertEqual(c.dictionary[0].ordered, "lessthan")
 
+    def test_filter_eightfollowseleven(self):
+        c = Cryptoanagram(
+            "I",
+            unordered="1234567890ABCDEFGHI",
+            dictionary={Word("1234567890A"), Word("BCDE"), Word("BCDEFGHI")},
+        )
+        self.assertEqual(len(c.dictionary), 3)
+        self.assertEqual(len(c._dictionary), 3)
+        d = c.push(
+            "1234567890A"
+        )  # an eleven lettered word should only have 8 letter words available
+        self.assertEqual(len(d.dictionary), 1)
+        self.assertEqual(len(c._dictionary), 3)
+
 
 if __name__ == "__main__":
     unittest.main()
