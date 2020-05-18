@@ -1,3 +1,5 @@
+import sys
 
 def run():
-    print("test")
+    s = sys.argv[1:]
+    print(' '.join(s))
