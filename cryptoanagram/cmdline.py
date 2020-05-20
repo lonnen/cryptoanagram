@@ -1,6 +1,8 @@
 import sys
 
+from . import Cryptoanagram
 
 def run():
     s = sys.argv[1:]
-    print(" ".join(s))
+    c = Cryptoanagram(" ".join(s))
+    print(c.ordered)
