@@ -4,7 +4,9 @@ from . import Cryptoanagram
 
 def run():
     s = sys.argv[1:]
-    c = Cryptoanagram(" ".join(s))
+    submitted = " ".join(s)
+    c = Cryptoanagram(submitted)
+    print("\nCandidate: ", submitted, "\n")
     print(c.ordered)
     print(c.unordered)
     for w in c.dictionary:
