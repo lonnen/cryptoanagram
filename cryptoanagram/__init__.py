@@ -32,13 +32,16 @@ def ngrams(n, corpus="all_trex"):
 
 
 def wordset(corpus="all_trex"):
-    return map(lambda x: Word(x), set(ngrams(1, corpus)))
+    return map(lambda x: Word(x[0]), [s for s in set(ngrams(1, corpus)) if s[0] is not None])
 
 
 class Word:
     def __init__(self, ordered):
         self.ordered = ordered
         self.unordered = Multiset(ordered)
+
+    def __str__(self):
+        return "Word: {}, {}".format(self.ordered, self.unordered)
 
 
 class Cryptoanagram:
@@ -76,7 +79,6 @@ class Cryptoanagram:
         )
 
     def _filter(self, word, threshold=0.5):
-
         probabilities = []
 
         probabilities.append(1.0 if word.unordered.issubset(self.unordered) else 0.0)
