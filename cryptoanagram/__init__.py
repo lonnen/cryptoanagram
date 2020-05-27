@@ -32,7 +32,9 @@ def ngrams(n, corpus="all_trex"):
 
 
 def wordset(corpus="all_trex"):
-    return map(lambda x: Word(x[0]), [s for s in set(ngrams(1, corpus)) if s[0] is not None])
+    return map(
+        lambda x: Word(x[0]), [s for s in set(ngrams(1, corpus)) if s[0] is not None]
+    )
 
 
 class Word:
@@ -50,8 +52,15 @@ class Cryptoanagram:
     ):
         if isinstance(ordered, str):
             ordered = [x.strip() for x in ordered.split()]
-        self.unordered = Multiset(unordered)
         self.ordered = ordered
+
+        m_ordered = Multiset(ordered)
+        m_unordered = Multiset(unordered)
+
+        if not m_ordered.issubset(m_unordered):
+            raise ValueError("Insufficient unordered letters")
+
+        self.unordered = m_unordered.difference(m_ordered)
         # super hacky, but we need the original dict for unordering words
         self._dictionary = dictionary
         self.dictionary = list(filter(self._filter, dictionary))
@@ -59,13 +68,11 @@ class Cryptoanagram:
     def push(self, s):
         """append a string and subtract the letters from the pool"""
         w = Word(s)
-        if w.unordered.issubset(self.unordered):
-            return Cryptoanagram(
-                self.ordered + [w.ordered],
-                unordered=self.unordered.difference(w.unordered),
-                dictionary=self._dictionary,
-            )
-        raise ValueError("Insufficient unordered letters")
+        return Cryptoanagram(
+            self.ordered + [w.ordered],
+            unordered=self.unordered,
+            dictionary=self._dictionary,
+        )
 
     def pop(self):
         position = -1
