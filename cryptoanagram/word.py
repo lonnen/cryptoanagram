@@ -1,5 +1,6 @@
 from multiset import Multiset
 
+
 class Word:
     def __init__(self, ordered):
         self.ordered = ordered
