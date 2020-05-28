@@ -1,5 +1,6 @@
 # flake8: noqa
 from .utils import datadir, load_lines
+from .word import Word
 
 import operator
 
@@ -35,15 +36,6 @@ def wordset(corpus="all_trex"):
     return map(
         lambda x: Word(x[0]), [s for s in set(ngrams(1, corpus)) if s[0] is not None]
     )
-
-
-class Word:
-    def __init__(self, ordered):
-        self.ordered = ordered
-        self.unordered = Multiset(ordered)
-
-    def __str__(self):
-        return "Word: {}, {}".format(self.ordered, self.unordered)
 
 
 class Cryptoanagram:
