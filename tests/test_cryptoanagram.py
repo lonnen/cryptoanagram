@@ -5,7 +5,7 @@ from multiset import Multiset
 import unittest
 
 Cryptoanagram = cryptoanagram.Cryptoanagram
-Word = cryptoanagram.Word
+Word = cryptoanagram.word.Word
 
 
 class TestSuite(unittest.TestCase):

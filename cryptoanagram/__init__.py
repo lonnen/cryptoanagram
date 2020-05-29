@@ -1,12 +1,10 @@
 # flake8: noqa
-from .utils import datadir, load_lines
+from .corpus import datadir, load_lines, ngrams, wordset
 from .word import Word
 
 import operator
 
 from functools import reduce
-
-from more_itertools import windowed
 
 from multiset import Multiset
 
@@ -23,19 +21,6 @@ QWANTZLE_LETTERS = (
     "ttttttttttttooooooooooeeeeeeeeaaaaaaallllllnnnnnnuuuuuuiiiiisssssddddd"
     + "hhhhhyyyyyIIrrrfffbbwwkcmvg:,!!"
 )
-
-
-def ngrams(n, corpus="all_trex"):
-    for line in load_lines(datadir() + "/" + corpus + ".txt"):
-        words = line.split()
-        for w in windowed(words, n):
-            yield w
-
-
-def wordset(corpus="all_trex"):
-    return map(
-        lambda x: Word(x[0]), [s for s in set(ngrams(1, corpus)) if s[0] is not None]
-    )
 
 
 class Cryptoanagram:
