@@ -2,6 +2,8 @@ import os
 
 from more_itertools import windowed
 
+from .word import Word
+
 
 def ngrams(n, corpus="all_trex"):
     for line in load_lines(datadir() + "/" + corpus + ".txt"):
