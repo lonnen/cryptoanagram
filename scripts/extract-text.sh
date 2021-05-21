@@ -17,7 +17,7 @@ HELP
 }
 
 
-if [ "$#" < 1]; then
+if [ "$#" -ne 1 ]; then
     usage
 fi
 
