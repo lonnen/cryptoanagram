@@ -27,5 +27,8 @@ case $1 in
         exit 0
         ;;
     *)
-        cat $1 | jq '.[].text' --raw-output
+        # strip lines that do not contain at least one colon
+        # strip lines that start
+        # strip lines that are dos command prompts
+        cat $1 | jq '.[].text' --raw-output | sed '/:/!d' | sed '/^{/d' | sed '/^\[/d' | sed '/^C:\\/d'
 esac
