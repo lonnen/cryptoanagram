@@ -6,7 +6,7 @@ import Text.ParserCombinators.ReadP
 
 main = getArgs >>= parse >>= putStr . clean
 
-# replace this with a meaningful parser
+--replace this with a meaningful parser
 clean = unlines . lines
 
 isColon :: Char -> Bool
