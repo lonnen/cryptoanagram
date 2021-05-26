@@ -1,4 +1,4 @@
-#!/usr/bin/env stack
+
 
 import System.Environment (getArgs)
 import System.Exit ( ExitCode(ExitSuccess), ExitCode(ExitFailure), exitWith )
@@ -17,5 +17,5 @@ parse [] = getContents
 parse fs = concat `fmap` mapM readFile fs
 
 usage = putStrLn "comicsParser file"
-exit  = exitWith ExitSuccess
+exit  = ExitSuccess
 die   = exitWith (ExitFailure 1)
