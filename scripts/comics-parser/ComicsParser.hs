@@ -1,7 +1,7 @@
 
 
 import System.Environment (getArgs)
-import System.Exit ( ExitCode(ExitSuccess), ExitCode(ExitFailure), exitWith )
+import System.Exit ( ExitCode(ExitFailure), exitSuccess, exitWith )
 import Text.ParserCombinators.ReadP
 
 main = getArgs >>= parse >>= putStr . clean
@@ -17,5 +17,5 @@ parse [] = getContents
 parse fs = concat `fmap` mapM readFile fs
 
 usage = putStrLn "comicsParser file"
-exit  = ExitSuccess
+exit  = exitSuccess
 die   = exitWith (ExitFailure 1)
