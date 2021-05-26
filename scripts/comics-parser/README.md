@@ -7,7 +7,7 @@ In order to compile the script:
 
 ```
 $ stack setup
-$ stack exec -- gc ComicsParser.hs -o comicsParser
+$ stack exec -- ghc ComicsParser.hs -o comicsParser
 ```
 
 Then to run it:
