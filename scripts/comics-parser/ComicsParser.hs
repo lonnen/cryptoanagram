@@ -1,4 +1,4 @@
-
+#!/usr/bin/env stack
 
 import System.Environment (getArgs)
 import System.Exit ( ExitCode(ExitFailure), exitSuccess, exitWith )
