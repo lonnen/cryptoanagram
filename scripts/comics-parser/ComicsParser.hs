@@ -2,19 +2,16 @@
 
 import System.Environment (getArgs)
 import System.Exit ( ExitCode(ExitFailure), exitSuccess, exitWith )
-import Text.ParserCombinators.ReadP
+import Text.ParserCombinators.Parsec
 
-main = getArgs >>= parse >>= putStr . clean
+main = getArgs >>= parseArgs >>= putStr . clean
 
 --replace this with a meaningful parser
 clean = unlines . lines
 
-isColon :: Char -> Bool
-isColon char = char == ':'
-
-parse ["-h"] = usage >> exit
-parse [] = getContents
-parse fs = concat `fmap` mapM readFile fs
+parseArgs ["-h"] = usage >> exit
+parseArgs [] = getContents
+parseArgs fs = concat `fmap` mapM readFile fs
 
 usage = putStrLn "comicsParser file"
 exit  = exitSuccess
