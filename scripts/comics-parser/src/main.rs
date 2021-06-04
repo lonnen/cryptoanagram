@@ -18,7 +18,7 @@ fn main() -> io::Result<()> {
     let reader = BufReader::new(file);
 
     for line in reader.lines().map(|l| l.unwrap()) {
-        comics_parser::lex(&line).expect("trouble")
+        comics_parser::lex(&line).unwrap()
             .iter()
             .for_each(|p| println!("{:?}", p));
     }
