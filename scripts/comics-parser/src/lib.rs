@@ -1,17 +1,11 @@
 #[derive(Debug, Clone)]
-pub enum GrammarItem {
-    Speaker,
-    Sep,
-    Word,
+pub enum LexItem {
+    Word(String),
     EOL
 }
 
-#[derive(Debug, Clone)]
-pub enum LexItem {
-    Speaker(String),
-    Sep(char),
-    Word(String),
-    EOL
+pub fn is_ascii_alphanumeric_or_apostraphe(c: char) -> bool {
+    c.is_ascii_alphanumeric() || c == '\''
 }
 
 pub fn lex(input: &String) -> Result<Vec<LexItem>, String> {
@@ -44,7 +38,7 @@ pub fn lex(input: &String) -> Result<Vec<LexItem>, String> {
                 result.push(LexItem::Word(word.clone().into_iter().collect()));
                 word.clear();
             },
-            x if x.is_ascii_alphanumeric() | '\'' => {
+            x if is_ascii_alphanumeric_or_apostraphe(x) => {
                 it.next();
 
                 word.push(x);
@@ -56,4 +50,23 @@ pub fn lex(input: &String) -> Result<Vec<LexItem>, String> {
     }
 
     Ok(result)
+}
+
+pub struct ComicPanel {
+    speaker: String,
+    spoken: String
+}
+
+pub fn parse(input: Vec<LexItem>) -> ComicPanel {
+    let mut speaker = Vec::new();
+
+    let iterableInput = input.iter();
+
+    for word in input.iter() {
+        match word {
+
+        }
+    }
+
+    Ok()
 }
