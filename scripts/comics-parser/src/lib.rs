@@ -2,9 +2,9 @@ use nom::{
     IResult,
     bytes::complete::{
         take_until,
+        take_while,
         tag,
     },
-    character::is_space,
     multi::fold_many0,
     sequence::{
         separated_pair,
@@ -28,14 +28,15 @@ pub fn line(input: &str) -> IResult<&str, (&str, &str)> {
     )(input)
 }
 
-pub fn is_space_or_punctuation(chr: u8) -> bool {
-    is_space(chr) || "!\"#$%&()*+,-./:;<=>?@[]^_`{|}~".contains(chr as char)
+/// important: this intentionally does not include apostrophes
+pub fn is_not_space_or_specific_punctuation(chr: char) -> bool {
+    !" \t\n!\"#$%&()*+,-./:;<=>?@[]^_`{|}~".contains(chr)
 }
 
 pub fn words(input: &str) -> IResult<&str, Vec<&str>> {
     fold_many0(
-        take_until(
-            is_space_or_punctuation
+        take_while(
+            is_not_space_or_specific_punctuation
         ),
         Vec::new(),
         |mut acc: Vec<_>, item| {
@@ -95,4 +96,16 @@ pub fn lex(input: &str) -> Result<Vec<LexItem>, String> {
 fn test_line() {
     assert_eq!(line("professor: I can't believe it\n"), Ok(("", ("professor", " I can\'t believe it"))));
     assert_eq!(line("professor: believe me: it's bad\n"), Ok(("", ("professor", " believe me: it's bad"))))
+}
+
+#[test]
+fn test_is_not_space_or_specific_punctuation() {
+    assert!(is_not_space_or_specific_punctuation('a'));
+    assert!(is_not_space_or_specific_punctuation('1'));
+    // apostraphres are exempted but difficult to fit into function name
+    assert!(is_not_space_or_specific_punctuation('\''));
+    assert_eq!(is_not_space_or_specific_punctuation('['), false);
+    assert_eq!(is_not_space_or_specific_punctuation(' '), false);
+    assert_eq!(is_not_space_or_specific_punctuation('\t'), false);
+    assert_eq!(is_not_space_or_specific_punctuation('\n'), false);
 }
