@@ -1,9 +1,3 @@
-#[derive(Debug, Clone)]
-pub enum LexItem {
-    Word(String),
-    EOL
-}
-
 pub fn is_character_word(c: char) -> bool {
     "!\"#$%&()*+,-./:;<=>?@[]^_`{|}~".contains(c)
 }
@@ -34,50 +28,6 @@ pub fn parse(input: &str) -> Vec<String> {
     let expanded_words = expand_character_words(input);
     let output = tokenize(&expanded_words);
     output.into_iter().map(|w| w.into() ).collect()
-}
-
-pub fn lex(input: &String) -> Result<Vec<LexItem>, String> {
-    let mut result = Vec::new();
-    let mut word = Vec::new();
-
-    let mut it = input.chars().peekable();
-    while let Some(&c) = it.peek() {
-        match c {
-            '\n' => {
-                it.next();
-                result.push(LexItem::Word(word.clone().into_iter().collect()));
-                word.clear();
-                result.push(LexItem::EOL);
-            },
-            x if x.is_whitespace() => {
-                it.next();
-
-                if !word.is_empty() {
-                    result.push(LexItem::Word(word.clone().into_iter().collect()));
-                    word.clear();
-                }
-            },
-            x if "!\"#$%&()*+,-./:;<=>?@[]^_`{|}~".contains(x) => {
-                it.next();
-                result.push(LexItem::Word(word.clone().into_iter().collect()));
-                word.clear();
-
-                word.push(x);
-                result.push(LexItem::Word(word.clone().into_iter().collect()));
-                word.clear();
-            },
-            x if is_character_word(x) => {
-                it.next();
-
-                word.push(x);
-            },
-            _ => {
-                return Err(format!("unexpected character {}", c));
-            }
-        }
-    }
-
-    Ok(result)
 }
 
 #[test]
