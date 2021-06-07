@@ -30,6 +30,12 @@ pub fn tokenize(input: &str) -> Vec<&str> {
     input.split_whitespace().into_iter().collect()
 }
 
+pub fn parse(input: &str) -> Vec<String> {
+    let expanded_words = expand_character_words(input);
+    let output = tokenize(&expanded_words);
+    output.into_iter().map(|w| w.into() ).collect()
+}
+
 pub fn lex(input: &String) -> Result<Vec<LexItem>, String> {
     let mut result = Vec::new();
     let mut word = Vec::new();
@@ -95,8 +101,6 @@ fn test_tokenize() {
 #[test]
 fn test_expand_and_tokenize() {
     assert_eq!(
-        tokenize(
-            &expand_character_words(
-                "I  can't    be[lie]ve   it")),
+        parse("I  can't    be[lie]ve   it"),
         vec!["I", "can\'t", "be", "[", "lie", "]", "ve", "it"]);
 }
