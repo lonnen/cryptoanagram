@@ -5,11 +5,11 @@ lex and parse the extraced text of dinosaur comics, outputting them in a regular
 
 Features (it will eventually have):
 
-- [ ] remove the speaker
-- [ ] preserve case
-- [ ] preserve special characters
-- [ ] special characters are treated like their own word, except apostraphes
-- [ ] words are separated by single spaces
+- [x] remove the speaker
+- [x] preserve case
+- [x] preserve special characters
+- [x] special characters are treated like their own word, except apostraphes
+- [x] words are separated by single spaces
 
 Turning this:
 
