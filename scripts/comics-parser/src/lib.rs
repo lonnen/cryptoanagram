@@ -33,6 +33,11 @@ pub fn is_not_space_or_specific_punctuation(chr: char) -> bool {
     !" \t\n!\"#$%&()*+,-./:;<=>?@[]^_`{|}~".contains(chr)
 }
 
+/// certain punctuation marks should be treated as single-letter words
+pub fn is_specific_punctuation(chr: char) -> bool {
+    "!\"#$%&()*+,-./:;<=>?@[]^_`{|}~".contains(chr)
+}
+
 pub fn words(input: &str) -> IResult<&str, Vec<&str>> {
     fold_many0(
         take_while(
@@ -108,4 +113,14 @@ fn test_is_not_space_or_specific_punctuation() {
     assert_eq!(is_not_space_or_specific_punctuation(' '), false);
     assert_eq!(is_not_space_or_specific_punctuation('\t'), false);
     assert_eq!(is_not_space_or_specific_punctuation('\n'), false);
+}
+
+fn test_is_specific_punctuation() {
+    assert_eq!(is_specific_punctuation('a'), false);
+    assert_eq!(is_specific_punctuation('1'), false);
+    assert_eq!(is_specific_punctuation('\''), false);
+    assert!(is_specific_punctuation('['));
+    assert!(is_specific_punctuation(' '));
+    assert!(is_specific_punctuation('\t'));
+    assert!(is_specific_punctuation('\n'));
 }
