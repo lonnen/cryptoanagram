@@ -4,8 +4,30 @@ pub enum LexItem {
     EOL
 }
 
-pub fn is_ascii_alphanumeric_or_apostraphe(c: char) -> bool {
-    c.is_ascii_alphanumeric() || c == '\''
+pub fn is_character_word(c: char) -> bool {
+    "!\"#$%&()*+,-./:;<=>?@[]^_`{|}~".contains(c)
+}
+
+pub fn expand_character_words(input: &str) -> String {
+    let mut output = Vec::<char>::new();
+
+    for c in input.chars() {
+        match c {
+            c if is_character_word(c) => {
+                output.push(' ');
+                output.push(c);
+                output.push(' ');
+            },
+            _ => {
+                output.push(c);
+            }
+        }
+    }
+    output.into_iter().collect()
+}
+
+pub fn tokenize(input: &str) -> Vec<&str> {
+    input.split_whitespace().into_iter().collect()
 }
 
 pub fn lex(input: &String) -> Result<Vec<LexItem>, String> {
@@ -38,7 +60,7 @@ pub fn lex(input: &String) -> Result<Vec<LexItem>, String> {
                 result.push(LexItem::Word(word.clone().into_iter().collect()));
                 word.clear();
             },
-            x if is_ascii_alphanumeric_or_apostraphe(x) => {
+            x if is_character_word(x) => {
                 it.next();
 
                 word.push(x);
@@ -52,21 +74,29 @@ pub fn lex(input: &String) -> Result<Vec<LexItem>, String> {
     Ok(result)
 }
 
-pub struct ComicPanel {
-    speaker: String,
-    spoken: String
+#[test]
+fn test_expand_character_words() {
+    assert_eq!(expand_character_words(""), "");
+    assert_eq!(expand_character_words("a"), "a");
+    assert_eq!(expand_character_words("abc"), "abc");
+    assert_eq!(expand_character_words("["), " [ ");
+    assert_eq!(expand_character_words("[abc]"), " [ abc ] ");
+    assert_eq!(expand_character_words("can't"), "can't");
+    assert_eq!(expand_character_words("can! you"), "can !  you");
 }
 
-pub fn parse(input: Vec<LexItem>) -> ComicPanel {
-    let mut speaker = Vec::new();
+#[test]
+fn test_tokenize() {
+    assert_eq!(tokenize("I can't believe it"), vec!["I", "can\'t", "believe", "it"]);
+    assert_eq!(tokenize("I  can't    believe   it"), vec!["I", "can\'t", "believe", "it"]);
+    assert_eq!(tokenize("I  can't    be[lie]ve   it"), vec!["I", "can\'t", "be[lie]ve", "it"]);
+}
 
-    let iterableInput = input.iter();
-
-    for word in input.iter() {
-        match word {
-
-        }
-    }
-
-    Ok()
+#[test]
+fn test_expand_and_tokenize() {
+    assert_eq!(
+        tokenize(
+            &expand_character_words(
+                "I  can't    be[lie]ve   it")),
+        vec!["I", "can\'t", "be", "[", "lie", "]", "ve", "it"]);
 }
