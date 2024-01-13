@@ -5,4 +5,4 @@ authors = ["lonnen <chris.lonnen@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-structopt = "0.3.21"
+clap = { version = "4.4.16", features = ["derive"] }

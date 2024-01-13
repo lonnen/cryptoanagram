@@ -1,24 +1,31 @@
 use std::fs::File;
 use std::io::{self, prelude::*, BufReader};
 
-use structopt::StructOpt;
+use clap::Parser;
 
-#[derive(StructOpt)]
+#[derive(Parser, Debug)]
+#[clap(author, version, about, long_about = None)]
 struct Cli {
-    #[structopt(parse(from_os_str))]
     input: std::path::PathBuf,
 }
 
-
 fn main() -> io::Result<()> {
-    let args = Cli::from_args();
+    let args = Cli::parse();
 
     let file = File::open(args.input)?;
 
     let reader = BufReader::new(file);
 
     for line in reader.lines().map(|l| l.unwrap()) {
-        println!("{}", comics_parser::parse(&line).join(" ").split_once(":").unwrap().1.trim());
+        println!(
+            "{}",
+            comics_parser::parse(&line)
+                .join(" ")
+                .split_once(":")
+                .unwrap()
+                .1
+                .trim()
+        );
     }
 
     Ok(())

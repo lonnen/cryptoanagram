@@ -11,7 +11,7 @@ pub fn expand_character_words(input: &str) -> String {
                 output.push(' ');
                 output.push(c);
                 output.push(' ');
-            },
+            }
             _ => {
                 output.push(c);
             }
@@ -27,7 +27,7 @@ pub fn tokenize(input: &str) -> Vec<&str> {
 pub fn parse(input: &str) -> Vec<String> {
     let expanded_words = expand_character_words(input);
     let output = tokenize(&expanded_words);
-    output.into_iter().map(|w| w.into() ).collect()
+    output.into_iter().map(|w| w.into()).collect()
 }
 
 #[test]
@@ -43,14 +43,24 @@ fn test_expand_character_words() {
 
 #[test]
 fn test_tokenize() {
-    assert_eq!(tokenize("I can't believe it"), vec!["I", "can\'t", "believe", "it"]);
-    assert_eq!(tokenize("I  can't    believe   it"), vec!["I", "can\'t", "believe", "it"]);
-    assert_eq!(tokenize("I  can't    be[lie]ve   it"), vec!["I", "can\'t", "be[lie]ve", "it"]);
+    assert_eq!(
+        tokenize("I can't believe it"),
+        vec!["I", "can\'t", "believe", "it"]
+    );
+    assert_eq!(
+        tokenize("I  can't    believe   it"),
+        vec!["I", "can\'t", "believe", "it"]
+    );
+    assert_eq!(
+        tokenize("I  can't    be[lie]ve   it"),
+        vec!["I", "can\'t", "be[lie]ve", "it"]
+    );
 }
 
 #[test]
 fn test_expand_and_tokenize() {
     assert_eq!(
         parse("I  can't    be[lie]ve   it"),
-        vec!["I", "can\'t", "be", "[", "lie", "]", "ve", "it"]);
+        vec!["I", "can\'t", "be", "[", "lie", "]", "ve", "it"]
+    );
 }
