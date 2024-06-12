@@ -24,3 +24,7 @@ Ryan North followed up with additional clues accompanying [Comic 1666](http://qw
 - The longest word is 11 characters long, the second longest is 8 characters long, and they're side-by-side in the solution
 
 Additionally at TCAF in 2012 Ryan said to me personally that the solution would make a good epitaph.
+
+In 2023 Ryan provided [one more Qwantzle clue](https://www.qwantz.com/index.php?comic=4005#blogpost): The final letter is "w"
+
+Combined with earlier clues this means the sentence ends in "w!!". Presumably this will rule out all the current false-positives that have been submitted.
