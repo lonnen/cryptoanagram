@@ -21,7 +21,6 @@ with open(args[1]) as raw_file:
     for comic in data:
         title, text, url, id = comic.values()
         panels = text.split('\n\n')
-        panel_count = len(panels)
         comics.append({
             "id": id,
             "title": title,
