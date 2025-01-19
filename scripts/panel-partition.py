@@ -20,11 +20,19 @@ with open(args[1]) as raw_file:
     data = json.load(raw_file)
     for comic in data:
         title, text, url, id = comic.values()
-        panels = text.split('\n\n')
+        splits = text.split('\n\n')
+        panels = []
+        metadata = []
+        for panel in splits:
+            if panel.startswith("{{"):
+                metadata.append(panel)
+            else:
+                panels.append(panel)
         comics.append({
             "id": id,
             "title": title,
             "text": panels,
+            "metadata": metadata,
             "url": url,
         })
 
