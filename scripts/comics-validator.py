@@ -14,8 +14,8 @@ def check_comics(filename):
         with open(filename, "r") as file:
             comics = json.load(file)
             for comic in comics:
-                id, _title, panels, _metadata, _url = comic.values()
-                if len(panels) != 6:
+                id, _title, panels, metadata, _url = comic.values()
+                if len(panels) != 6 and ("irregular" not in metadata):
                     print(
                         f"{id} has irregular panel count: {len(panels)}",
                         file=sys.stderr,
