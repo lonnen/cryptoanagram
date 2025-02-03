@@ -29,7 +29,7 @@ def parse_comic(comic) -> dict[str, str]:
             metadata.append(panel)
         else:
             panels.append(panel)
-    if len(panels) != 6:
+    if len(panels) != 6 and ("irregular" not in metadata):
         print(
             f"Panel {id} has irregular number of panels: {len(panels)}", file=sys.stderr
         )
