@@ -5,6 +5,8 @@ This repository hosts various data sets derived from [Dinosaur Comics](https://q
 
 The `data` folder contains data sets. If they're sourced from outside the repo, the data will have its own folder and README explaining the origins. Any top level data in there is derived from some script in this repository. Not every data set in this folder is manipulated or created by a script in this repo - some of it is merely archival.
 
+To understand the manual fixes applied to the `fixed_dino_comics_$date.json` the `comics-validator.py` file and the git commit log are good starting places. This isn't particularly thoroughly cleaned (i.e. there are many slight spelling variations, informal transcriber notes, no consistency in transcription style) but it does have a structural consistency and enough information to know which comics to ignore completely.
+
 The `scripts` folder contains tools that manipulate the contents of the data folder. The `scripts/comics-parser.py` script is probably what you want if you're curious about how these data were derived. Example usage looks like:
 
 ```bash
